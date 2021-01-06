@@ -1,0 +1,43 @@
+require: rubocop-rails
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 2.7.2
+  Exclude:
+    - 'vendor/**/*'
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/environments/*.rb'
+
+Style/Documentation:
+  Description: 'Document classes and non-namespace modules.'
+  Enabled: false
+
+Layout/LineLength:
+  Max: 140
+  # To make it possible to copy or click on URIs in the code, we allow lines
+  # containing a URI to be longer than Max.
+  AllowHeredoc: true
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'define']
+  Exclude:
+    - spec/factories/**/**/*
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/HttpPositionalArguments:
+  Enabled: false
+
+Rails/UnknownEnv:
+  Environments:
+    - development
+    - staging
+    - test
+    - production
+    - migration
