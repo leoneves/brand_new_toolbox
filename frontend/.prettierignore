@@ -1,0 +1,6 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+jest.config.js
+src/react-app-env.d.ts
