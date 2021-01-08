@@ -4,3 +4,4 @@ build/
 *.yml
 package-lock.json
 src/react-app-env.d.ts
+src/reportWebVitals.ts

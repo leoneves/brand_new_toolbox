@@ -9,6 +9,7 @@ backend/vendor/
 
 # tmps
 backend/tmp/
+frontend/.eslintcache
 
 # Log files
 *.log

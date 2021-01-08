@@ -6,7 +6,7 @@ const Login: React.FC = () => {
   const loginSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
 
-    const enteredUsername = usernameLogin.current!.value;
+    // const enteredUsername = usernameLogin.current!.value;
   };
 
   return (
