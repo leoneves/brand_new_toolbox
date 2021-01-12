@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to run locally
+- docker run --name brand_new_toolbox -e POSTGRES_USER=devuser -e POSTGRES_PASSWORD='devuser12345' -d -p 5432:5432 postgres
+- bundle e rails db:create
+- bundle e rails db:migrate
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Create super admin
+`User.create(user_name: 'super', role: 'super', email: 'super.admin@toolbox.com.br', password: 'test12')`
