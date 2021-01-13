@@ -1,6 +1,7 @@
 import UserState from './UserState';
 import { ActionType } from './Actions';
 import { LoginAction, LoginSuccessAction } from './Actions';
+import history from '../../history';
 
 const initialState: UserState = {
   username: '',
@@ -21,6 +22,7 @@ export const loginSuccess = (payload: { token: string }): LoginSuccessAction => 
 const authReducer = (state: UserState = initialState, action: LoginAction): UserState | LoginSuccessAction => {
   switch (action.type) {
     case ActionType.LOGIN:
+      history.push('/home');
       return { username: action.payload.user, authToken: action.payload.password };
     default:
       return state;
