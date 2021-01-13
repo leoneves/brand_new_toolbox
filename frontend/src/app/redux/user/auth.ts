@@ -8,9 +8,9 @@ const initialState: UserState = {
 };
 
 // Actions
-export const login = (username: string): LoginAction => ({
+export const login = (username: string, password: string): LoginAction => ({
   type: ActionType.LOGIN,
-  payload: { user: username, password: 'qwer78' },
+  payload: { user: username, password: password },
 });
 
 export const loginSuccess = (payload: { token: string }): LoginSuccessAction => ({

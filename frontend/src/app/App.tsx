@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
+import Login from './components/Login/Login';
 
-import Login from './components/Login';
+import classes from './App.module.scss';
 
-const App: React.FC = () => {
+const App: FunctionComponent = (): JSX.Element => {
   return (
-    <div className="App">
+    <div className={classes.app}>
       <Login />
     </div>
   );
