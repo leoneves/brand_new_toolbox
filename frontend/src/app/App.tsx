@@ -9,15 +9,15 @@ const Home = lazy(() => import('./containers/Home/Home'));
 
 const App: FunctionComponent = (): JSX.Element => {
   return (
-    <ContainerApp>
-      <Suspense fallback={<Loading />}>
+    <Suspense fallback={<Loading />}>
+      <ContainerApp>
         <Switch>
           <Route path="/refund" component={Refund} />
           <Route path="/home" component={Home} />
           <Route path="/" component={Login} />
         </Switch>
-      </Suspense>
-    </ContainerApp>
+      </ContainerApp>
+    </Suspense>
   );
 };
 

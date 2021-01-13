@@ -4,7 +4,9 @@ import { ContainerLoading } from './Loading.styles';
 const Loading: FunctionComponent = (): JSX.Element => {
   return (
     <ContainerLoading>
-      <div>Loading…</div>
+      <div>
+        <h1>Loading…</h1>
+      </div>
     </ContainerLoading>
   );
 };
