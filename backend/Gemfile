@@ -16,6 +16,7 @@ end
 
 group :development do
   gem 'listen', '~> 3.3'
+  gem 'rack-cors', require: 'rack/cors'
   gem 'rubocop-rails', require: false
   gem 'spring'
 end

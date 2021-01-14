@@ -1,4 +1,5 @@
-import { CombinedState, combineReducers, createStore, Store } from 'redux';
+import { CombinedState, combineReducers, createStore, applyMiddleware, compose, Store } from 'redux';
+import thunk from 'redux-thunk';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import authReducer from './user/auth';
@@ -8,6 +9,6 @@ const rootReducer = combineReducers({
   user: authReducer,
 });
 
-const store: Store<CombinedState<RootState>> = createStore(rootReducer, devToolsEnhancer({}));
+const store: Store<CombinedState<RootState>> = createStore(rootReducer, compose(applyMiddleware(thunk), devToolsEnhancer({})));
 
 export default store;
