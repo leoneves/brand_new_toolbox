@@ -30,7 +30,7 @@ export const login = (
     const authToken = response.headers['authorization'];
     dispatch(loginSuccess({ email, user_name, authToken }));
   } catch (error) {
-    dispatch(loginFail());
+    dispatch(loginFail(error.response.data));
   }
 };
 
@@ -39,8 +39,9 @@ export const loginSuccess = (userResponse: UserResponse): LoginSuccessAction => 
   payload: { username: userResponse.user_name, email: userResponse.email, authToken: userResponse.authToken },
 });
 
-export const loginFail = (): LoginFailAction => ({
+export const loginFail = (message: string): LoginFailAction => ({
   type: ActionType.LOGIN_FAIL,
+  message,
 });
 
 const authReducer = (state: UserState = initialState, action: LoginSuccessAction | LoginFailAction): UserState => {
@@ -49,6 +50,7 @@ const authReducer = (state: UserState = initialState, action: LoginSuccessAction
       history.push('/home');
       return { email: action.payload.email, username: action.payload.username, authToken: action.payload.authToken };
     case ActionType.LOGIN_FAIL:
+      console.log(action.message);
       return state;
     default:
       return state;

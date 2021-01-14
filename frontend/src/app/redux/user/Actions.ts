@@ -1,5 +1,4 @@
 export enum ActionType {
-  LOGIN,
   LOGIN_FAIL,
   LOGIN_SUCCESS,
 }
@@ -11,4 +10,5 @@ export interface LoginSuccessAction {
 
 export interface LoginFailAction {
   type: ActionType.LOGIN_FAIL;
+  message: string;
 }

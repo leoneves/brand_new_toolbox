@@ -17,4 +17,8 @@ export const ContainerLogin = styled.div<ContainerLoginProps>`
     font-weight: bold;
     font-size: 1.2rem;
   }
+
+  p {
+    color: red;
+  }
 `;
