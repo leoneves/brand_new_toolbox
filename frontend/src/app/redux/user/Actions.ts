@@ -12,3 +12,5 @@ export interface LoginFailAction {
   type: ActionType.LOGIN_FAIL;
   message: string;
 }
+
+export type LoginAction = LoginSuccessAction | LoginFailAction;

@@ -1,9 +1,9 @@
 import UserState from './UserState';
-import { ActionType, LoginFailAction, LoginSuccessAction } from './Actions';
-import history from '../../history';
+import { ActionType, LoginAction, LoginSuccessAction, LoginFailAction } from './Actions';
 import { ThunkAction } from 'redux-thunk';
 import RootState from '../RootState';
 import Client from '../../client/client';
+import history from '../../history';
 
 const initialState: UserState = {
   email: '',
@@ -18,10 +18,7 @@ interface UserResponse {
 }
 
 // Actions
-export const login = (
-  username: string,
-  password: string
-): ThunkAction<void, RootState, null, LoginSuccessAction | LoginFailAction> => async dispatch => {
+export const login = (username: string, password: string): ThunkAction<void, RootState, null, LoginAction> => async dispatch => {
   try {
     const response = await Client.getInstance().post<UserResponse>('/login', {
       user: { email: username, password: password },
@@ -44,14 +41,26 @@ export const loginFail = (message: string): LoginFailAction => ({
   message,
 });
 
-const authReducer = (state: UserState = initialState, action: LoginSuccessAction | LoginFailAction): UserState => {
+class LoginError extends Error {
+  message: string;
+  constructor(message: string) {
+    super();
+    this.message = message;
+  }
+}
+
+const authReducer = (state: UserState = initialState, action: LoginAction): UserState => {
   switch (action.type) {
     case ActionType.LOGIN_SUCCESS:
       history.push('/home');
-      return { email: action.payload.email, username: action.payload.username, authToken: action.payload.authToken };
+      return {
+        ...state,
+        email: action.payload.email,
+        username: action.payload.username,
+        authToken: action.payload.authToken,
+      };
     case ActionType.LOGIN_FAIL:
-      console.log(action.message);
-      return state;
+      throw new LoginError(action.message);
     default:
       return state;
   }
