@@ -1,6 +1,5 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import Refund from '../../components/Refund/Refund';
 import RootState from '../../redux/RootState';
 import UserState from '../../redux/user/UserState';
 
@@ -10,7 +9,6 @@ class Home extends Component<HomeProps> {
       <div>
         <p>Home</p>
         <p>Well come: {this.props.username}</p>
-        <Refund />
       </div>
     );
   }

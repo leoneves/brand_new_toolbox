@@ -4,7 +4,6 @@ import { ContainerApp } from './App.styles';
 import Loading from './components/Loading/Loading';
 
 const Login = lazy(() => import('./components/Login/Login'));
-const Refund = lazy(() => import('./components/Refund/Refund'));
 const Home = lazy(() => import('./containers/Home/Home'));
 
 const App: FunctionComponent = (): JSX.Element => {
@@ -12,7 +11,6 @@ const App: FunctionComponent = (): JSX.Element => {
     <Suspense fallback={<Loading />}>
       <ContainerApp>
         <Switch>
-          <Route path="/refund" component={Refund} />
           <Route path="/home" component={Home} />
           <Route path="/" component={Login} />
         </Switch>
