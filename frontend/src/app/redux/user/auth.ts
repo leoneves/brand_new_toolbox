@@ -18,16 +18,19 @@ interface UserResponse {
 }
 
 // Actions
-export const login = (username: string, password: string): ThunkAction<void, RootState, null, LoginAction> => async dispatch => {
+export const login = (
+  username: string,
+  password: string
+): ThunkAction<Promise<LoginAction>, RootState, null, LoginAction> => async dispatch => {
   try {
     const response = await Client.getInstance().post<UserResponse>('/login', {
       user: { email: username, password: password },
     });
     const { email, user_name } = response.data;
     const authToken = response.headers['authorization'];
-    dispatch(loginSuccess({ email, user_name, authToken }));
+    return dispatch(loginSuccess({ email, user_name, authToken }));
   } catch (error) {
-    dispatch(loginFail(error.response.data));
+    return dispatch(loginFail(error.response.data));
   }
 };
 
