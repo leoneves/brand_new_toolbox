@@ -2,8 +2,8 @@ import { FunctionComponent, lazy, Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { ContainerApp } from './App.styles';
 import Loading from './components/Loading/Loading';
-import Playground from './Playground/Playground';
 
+const Playground = lazy(() => import('./Playground/Playground'));
 const Login = lazy(() => import('./components/Login/Login'));
 const Home = lazy(() => import('./containers/Home/Home'));
 
