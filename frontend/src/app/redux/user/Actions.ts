@@ -1,3 +1,5 @@
+import { CallHistoryMethodAction } from 'connected-react-router';
+
 export enum ActionType {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
@@ -13,4 +15,4 @@ export interface LoginFailAction {
   message: string;
 }
 
-export type LoginAction = LoginSuccessAction | LoginFailAction;
+export type LoginAction = LoginSuccessAction | LoginFailAction | CallHistoryMethodAction;

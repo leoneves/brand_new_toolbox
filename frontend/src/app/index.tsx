@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
-import history from './history';
 
 import App from './App';
 import reportWebVitals from '../reportWebVitals';
-import store from './redux/store';
+import configureStore, { history } from './redux/configureStore';
+
+const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Router history={history}>
-        <App />
-      </Router>
+      <App history={history} />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

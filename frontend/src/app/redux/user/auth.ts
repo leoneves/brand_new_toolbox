@@ -1,9 +1,9 @@
+import { ThunkAction } from 'redux-thunk';
 import UserState from './UserState';
 import { ActionType, LoginAction, LoginSuccessAction, LoginFailAction } from './Actions';
-import { ThunkAction } from 'redux-thunk';
 import RootState from '../RootState';
 import Client from '../../client/client';
-import history from '../../history';
+import { push } from 'connected-react-router';
 
 const initialState: UserState = {
   email: '',
@@ -28,7 +28,8 @@ export const login = (
     });
     const { email, user_name } = response.data;
     const authToken = response.headers['authorization'];
-    return dispatch(loginSuccess({ email, user_name, authToken }));
+    dispatch(loginSuccess({ email, user_name, authToken }));
+    return dispatch(push('/home'));
   } catch (error) {
     return dispatch(loginFail(error.response.data));
   }
@@ -55,7 +56,6 @@ class LoginError extends Error {
 const authReducer = (state: UserState = initialState, action: LoginAction): UserState => {
   switch (action.type) {
     case ActionType.LOGIN_SUCCESS:
-      history.push('/home');
       return {
         ...state,
         email: action.payload.email,
