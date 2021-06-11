@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../redux/user/auth';
-import { ContainerLogin } from './Login.styles';
+import { FormAuthenticationContainer, ErrorMessage, SuccessMessage } from '../Generics/Form.styles';
 import { LoginAction, LoginFailAction } from '../../redux/user/Actions';
 import { ThunkDispatch } from 'redux-thunk';
 import RootState from '../../redux/RootState';
@@ -10,6 +10,7 @@ const Login: FunctionComponent = (): JSX.Element => {
   const usernameLogin = useRef<HTMLInputElement>(null);
   const passwordLogin = useRef<HTMLInputElement>(null);
   const [state, setState] = useState({ hasError: false, errorMessage: '' });
+  const applicationState = useSelector((state: RootState) => state.application);
   const dispatch: ThunkDispatch<RootState, null, LoginAction> = useDispatch();
 
   const callLogin: LoginThunk = (username: string, password: string) => {
@@ -28,9 +29,10 @@ const Login: FunctionComponent = (): JSX.Element => {
   };
 
   return (
-    <ContainerLogin height={600} verticalAlign={'middle'}>
+    <FormAuthenticationContainer height={600} verticalAlign={'middle'}>
       <form onSubmit={loginSubmitHandler}>
-        {state.hasError && <p>{state.errorMessage}</p>}
+        {state.hasError && <ErrorMessage>{state.errorMessage}</ErrorMessage>}
+        {applicationState.message && <SuccessMessage>{applicationState.message}</SuccessMessage>}
         <pre>
           <label htmlFor={'username'}>User: </label>
           <input type={'text'} id={'username'} ref={usernameLogin} />
@@ -41,7 +43,7 @@ const Login: FunctionComponent = (): JSX.Element => {
         </pre>
         <button type={'submit'}>Login</button>
       </form>
-    </ContainerLogin>
+    </FormAuthenticationContainer>
   );
 };
 

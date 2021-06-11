@@ -3,6 +3,8 @@ import { CallHistoryMethodAction } from 'connected-react-router';
 export enum ActionType {
   LOGIN_FAIL,
   LOGIN_SUCCESS,
+  SUCCESS,
+  ERROR,
 }
 
 export interface LoginSuccessAction {
@@ -15,4 +17,15 @@ export interface LoginFailAction {
   message: string;
 }
 
+export interface Error {
+  type: ActionType.ERROR;
+  message: string;
+}
+
+export interface GenericSuccess {
+  type: ActionType.SUCCESS;
+  payload: { axiosState: number; message: string };
+}
+
 export type LoginAction = LoginSuccessAction | LoginFailAction | CallHistoryMethodAction;
+export type GenericAction = GenericSuccess | Error | CallHistoryMethodAction;

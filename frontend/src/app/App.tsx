@@ -8,6 +8,8 @@ import Loading from './components/Loading/Loading';
 
 const Playground = lazy(() => import('./Playground/Playground'));
 const Login = lazy(() => import('./components/Login/Login'));
+const ForgotPassword = lazy(() => import('./components/Password/ForgotPassword'));
+const UpdatePassword = lazy(() => import('./components/Password/UpdatePassword'));
 const Home = lazy(() => import('./containers/Home/Home'));
 
 interface AppProps {
@@ -22,6 +24,8 @@ const App: FunctionComponent<AppProps> = ({ history }: AppProps): JSX.Element =>
           <Switch>
             {process.env.NODE_ENV === 'development' && <Route path="/playground" exact component={Playground} />}
             <Route path="/home" exact component={Home} />
+            <Route path="/password/forgot" exact component={ForgotPassword} />
+            <Route path="/password/edit" exact component={UpdatePassword} />
             <Route path="/" component={Login} />
           </Switch>
         </ContainerApp>

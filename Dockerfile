@@ -3,7 +3,7 @@ RUN apk update && apk add --no-cache supervisor
 RUN mkdir -p /var/log/supervisor
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-RUN apk add build-base libxml2-dev libxslt-dev postgresql postgresql-dev git curl openssh-client sqlite-dev tzdata bash
+RUN apk add build-base libxml2-dev libxslt-dev postgresql postgresql-dev git curl openssh-client sqlite-dev tzdata shared-mime-info bash
 
 # install node
 RUN apk add --repository https://dl-cdn.alpinelinux.org/alpine/v3.13/main/ --no-cache \

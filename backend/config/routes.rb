@@ -10,7 +10,8 @@ Rails.application.routes.draw do
              },
              controllers: {
                sessions: 'sessions',
-               registrations: 'registrations'
+               registrations: 'registrations',
+               passwords: 'passwords'
              }
 
   namespace :api do

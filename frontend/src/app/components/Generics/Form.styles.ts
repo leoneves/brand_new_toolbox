@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface ContainerLoginProps {
+interface FormAuthenticationContainerProps {
   height: number;
   verticalAlign: 'top' | 'middle' | 'bottom';
 }
 
-export const ContainerLogin = styled.div<ContainerLoginProps>`
+export const FormAuthenticationContainer = styled.div<FormAuthenticationContainerProps>`
   display: table;
   width: 100%;
   height: ${props => props.height}px;
@@ -17,8 +17,12 @@ export const ContainerLogin = styled.div<ContainerLoginProps>`
     font-weight: bold;
     font-size: 1.2rem;
   }
+`;
 
-  p {
-    color: red;
-  }
+export const SuccessMessage = styled.p`
+  color: green;
+`;
+
+export const ErrorMessage = styled.p`
+  color: red;
 `;

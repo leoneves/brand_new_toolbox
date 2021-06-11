@@ -1,9 +1,10 @@
 import { ThunkAction } from 'redux-thunk';
 import UserState from './UserState';
-import { ActionType, LoginAction, LoginSuccessAction, LoginFailAction } from './Actions';
+import { ActionType, LoginAction, LoginSuccessAction, LoginFailAction, GenericAction } from './Actions';
 import RootState from '../RootState';
 import Client from '../../client/client';
 import { push } from 'connected-react-router';
+import { success, fail } from '../GenericActions';
 
 const initialState: UserState = {
   email: '',
@@ -17,7 +18,7 @@ interface UserResponse {
   authToken: string;
 }
 
-// Actions
+// ThunkActions
 export const login = (
   username: string,
   password: string
@@ -35,6 +36,39 @@ export const login = (
   }
 };
 
+export const forgotPassword = (
+  email: string
+): ThunkAction<Promise<GenericAction>, RootState, null, GenericAction> => async dispatch => {
+  try {
+    const response = await Client.getInstance().post('/password', {
+      user: { email: email },
+    });
+    return dispatch(success(response, response.data.message));
+  } catch (error) {
+    return dispatch(fail('Error on forgot password'));
+  }
+};
+
+export const updatePassword = (
+  newPasswordValue: string,
+  newPasswordToken: string
+): ThunkAction<Promise<GenericAction>, RootState, null, GenericAction> => async dispatch => {
+  try {
+    const response = await Client.getInstance().put('/password', {
+      user: {
+        reset_password_token: newPasswordToken,
+        password: newPasswordValue,
+        password_confirmation: newPasswordValue,
+      },
+    });
+    dispatch(success(response, 'Password updated successful'));
+    return dispatch(push('/'));
+  } catch (error) {
+    return dispatch(fail('Error on Update password'));
+  }
+};
+
+// Actions
 export const loginSuccess = (userResponse: UserResponse): LoginSuccessAction => ({
   type: ActionType.LOGIN_SUCCESS,
   payload: { username: userResponse.user_name, email: userResponse.email, authToken: userResponse.authToken },
