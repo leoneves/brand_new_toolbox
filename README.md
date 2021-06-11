@@ -1,3 +1,11 @@
+# Brand new toolboox
+
+## Abstract
+A bootstrap project to creating a back-office. It's based on Devise and Devise jwt in its backend; Furthermore, including a frontend with React.
+
+## Getting started
+  * Configure Devise to reset password(through action_mailer);
+  * In config/environments/*.rb, change host in config.action_mailer.default_url_options to your host address;
 
 ## How to run in docker
 
